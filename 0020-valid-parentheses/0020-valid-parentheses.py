@@ -1,15 +1,20 @@
+
 class Solution:
-  def isValid(self, s: str) -> bool:
-    stack = []
-
-    for c in s:
-      if c == '(':
-        stack.append(')')
-      elif c == '{':
-        stack.append('}')
-      elif c == '[':
-        stack.append(']')
-      elif not stack or stack.pop() != c:
-        return False
-
-    return not stack
+    def isValid(self, s: str) -> bool:
+        l=[]
+        for i in range(len(s)):
+            if s[i] in '({[':
+                l.append(s[i])
+            elif s[i] in ')}]':
+                if len(l)==0:
+                    return False
+                if(s[i]==')' and l[-1]=='(') or (s[i]=='}' and l[-1]=='{') or (s[i]==']' and l[-1]=='['):
+                    l.pop()
+                else:
+                    return False
+        if len(l)!=0:
+            return False
+        else:
+            return True
+            
+            
